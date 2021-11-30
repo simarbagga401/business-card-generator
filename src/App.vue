@@ -1,54 +1,25 @@
 <template>
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
-  <BusinessCard :is-round="isRound" :border-width="borderWidth" />
+  <BusinessCard ref="businessCard" />
 
-  <!-- Using Options BusinessCard Component Provides -->
-  <div id="options">
-    <h2>Options:</h2>
-    <!-- Option 1  -->
-    <i>Determines if Corners of Card are Round.</i>
-    <button
-      @click="isRound = !isRound"
-      class="btn"
-      :class="{ active: isRound }"
-    >
-      Round
-    </button>
-
-    <!-- Option 2  -->
-    <i>Dertermines border width</i>
-    <p>Border Width: (default 0)</p>
-    {{ borderWidth }}
-    <select v-model="borderWidth">
-      <option
-        v-for="option in options"
-        :value="option.value"
-        :key="option.value"
-      >
-        {{ option.text }}
-      </option>
-    </select>
-  </div>
+  <!-- Download BusinessCard -->
+  <button class="btn" @click="this.$refs.businessCard.saveCardAsImage('png')">
+    Download Card As png
+  </button>
+  <button class="btn" @click="this.$refs.businessCard.saveCardAsImage('jpeg')">
+    Download Card As jpeg
+  </button>
 </template>
 
 <script>
 import BusinessCard from "./components/BusinessCard.vue";
 export default {
+  data() {
+    return {};
+  },
   components: {
     BusinessCard,
-  },
-  data() {
-    return {
-      isRound: false,
-      borderWidth: 0,
-      options: [
-        { text: "0", value: 0 },
-        { text: "1", value: 1 },
-        { text: "2", value: 2 },
-        { text: "3", value: 3 },
-      ],
-    };
   },
 };
 </script>
@@ -65,14 +36,11 @@ export default {
   margin-top: 60px;
 }
 
-#options {
-  display: flex;
-  flex-direction: column;
-}
-
 .btn {
-  padding: 5px 10px;
+  padding: 10px 15px;
   margin: 5px;
+  background: rgb(64, 242, 255);
+  border: 1px solid rgb(65, 217, 255);
 }
 .btn.active {
   border: 1px solid rgb(109, 255, 109);

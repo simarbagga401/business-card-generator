@@ -1,26 +1,34 @@
 <template>
-  <div id="business-card" :class="dynamicClasses">
-    <p>business card</p>
-    {{ dynamicClasses }}
-    borderWidth: {{ borderWidth }}
+  <div id="business-card" ref="card">
+    <h2>business card</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, quas?
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["isRound", "borderWidth"],
-  data() {
-    return {};
-  },
-  computed: {
-    dynamicClasses() {
-      // Pushing Dynamic Css Classes in Classes Array and Returning it.
-      let Classes = [];
-      if (this.isRound) Classes.push("round");
-      let borderWidthValue = this.borderWidth;
-      Classes.push(`border-${this.borderWidth}`);
+  methods: {
+    async saveCardAsImage(imageFormat) {
+      console.log("printing..");
+      const el = this.$refs.card;
+      const options = {
+        type: "dataURL",
+      };
 
-      return Classes;
+      const printCanvas = await html2canvas(el, options);
+      const link = document.createElement("a");
+
+      link.setAttribute("download", `download.${imageFormat}`);
+      link.setAttribute(
+        "href",
+        printCanvas
+          .toDataURL(`image/${imageFormat}`)
+          .replace(`image/${imageFormat}`, "image/octet-stream")
+      );
+      link.click();
+      console.log("done");
     },
   },
 };
@@ -31,28 +39,12 @@ export default {
   width: 400px;
   height: 228px;
   background: rgb(248, 248, 248);
-  border: 1px solid rgb(87, 87, 87);
+  border: 1px solid rgb(224, 224, 224);
   box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
   -webkit-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   margin: 10px;
-}
-
-/* Dynamic-Classes */
-#business-card.round {
-  border-radius: 20px;
-}
-#business-card.border-0 {
-  outline: 0px solid black;
-}
-#business-card.border-1 {
-  outline: 1px solid black;
-}
-#business-card.border-2 {
-  outline: 2px solid black;
-}
-#business-card.border-3 {
-  outline: 3px solid black;
 }
 
 /* Media-Queries */
