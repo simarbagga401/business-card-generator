@@ -1,15 +1,14 @@
 <template>
-  <div id="business-card" :class="{ isRound: 'round' }">
+  <div id="business-card" :class="{ round: isRound }">
     <p>business card</p>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["isRound"],
   data() {
-    return {
-      isRound: true,
-    };
+    return {};
   },
 };
 </script>
@@ -18,19 +17,31 @@ export default {
 #business-card {
   width: 400px;
   height: 228px;
-  box-shadow: -2px 2px 25px 0px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: -2px 2px 25px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: -2px 2px 25px 0px rgba(0, 0, 0, 0.4);
-}
-.round {
-  border-radius: 7px;
+  background: rgb(248, 248, 248);
+  border: 1px solid rgb(87, 87, 87);
+  box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
+  margin: 10px;
 }
 
+/* Dynamic-Classes */
+.round {
+  border-radius: 20px;
+}
+
+/* Media-Queries */
 @media screen and (max-width: 418px) {
   #business-card {
-    background: yellow;
     width: 300px;
-    height: 168px;
+    height: 171px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #business-card {
+    width: 500px;
+    height: 285px;
   }
 }
 </style>
