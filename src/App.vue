@@ -1,7 +1,7 @@
 <template>
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
-  <BusinessCard :isRound="isRound" />
+  <BusinessCard :is-round="isRound" :border-width="borderWidth" />
 
   <!-- Using Options BusinessCard Component Provides -->
   <div id="options">
@@ -17,14 +17,18 @@
     </button>
 
     <!-- Option 2  -->
-    <!-- <i>Dertermines border width</i>
-    <button
-      @click="isround = !isround"
-      class="btn"
-      :class="{ active: isround }"
-    >
-      round
-    </button> -->
+    <i>Dertermines border width</i>
+    <p>Border Width: (default 0)</p>
+    {{ borderWidth }}
+    <select v-model="borderWidth">
+      <option
+        v-for="option in options"
+        :value="option.value"
+        :key="option.value"
+      >
+        {{ option.text }}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -37,6 +41,13 @@ export default {
   data() {
     return {
       isRound: false,
+      borderWidth: 0,
+      options: [
+        { text: "0", value: 0 },
+        { text: "1", value: 1 },
+        { text: "2", value: 2 },
+        { text: "3", value: 3 },
+      ],
     };
   },
 };

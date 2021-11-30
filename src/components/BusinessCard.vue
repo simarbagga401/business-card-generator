@@ -1,14 +1,27 @@
 <template>
-  <div id="business-card" :class="{ round: isRound }">
+  <div id="business-card" :class="dynamicClasses">
     <p>business card</p>
+    {{ dynamicClasses }}
+    borderWidth: {{ borderWidth }}
   </div>
 </template>
 
 <script>
 export default {
-  props: ["isRound"],
+  props: ["isRound", "borderWidth"],
   data() {
     return {};
+  },
+  computed: {
+    dynamicClasses() {
+      // Pushing Dynamic Css Classes in Classes Array and Returning it.
+      let Classes = [];
+      if (this.isRound) Classes.push("round");
+      let borderWidthValue = this.borderWidth;
+      Classes.push(`border-${this.borderWidth}`);
+
+      return Classes;
+    },
   },
 };
 </script>
@@ -26,8 +39,20 @@ export default {
 }
 
 /* Dynamic-Classes */
-.round {
+#business-card.round {
   border-radius: 20px;
+}
+#business-card.border-0 {
+  outline: 0px solid black;
+}
+#business-card.border-1 {
+  outline: 1px solid black;
+}
+#business-card.border-2 {
+  outline: 2px solid black;
+}
+#business-card.border-3 {
+  outline: 3px solid black;
 }
 
 /* Media-Queries */
