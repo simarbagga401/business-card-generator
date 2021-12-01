@@ -2,15 +2,29 @@
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
   <BusinessCard ref="businessCard" />
-  <!-- <MovableTest /> -->
 
   <!-- Change Card Color -->
   <p>Change Background of Card :</p>
   <div class="color-picker"></div>
-  <button class="btn" @click="this.$refs.businessCard.changeBackground(pickedColor)">Apply</button>
+  <button
+    class="btn"
+    @click="this.$refs.businessCard.changeBackground('color', pickedColor)"
+  >
+    Change Card Background Color
+  </button>
+
+  <!-- Change Card Color -->
+  <p>Change Border Radius:</p>
+  <input
+    type="range"
+    v-model="sliderValue"
+    min="0"
+    max="50"
+    @input="this.$refs.businessCard.changeBorderRadius(sliderValue)"
+  />
 
   <!-- Download BusinessCard -->
-  {{pickedColor}}
+  {{ pickedColor }}
   <p>Download Card :</p>
   <button class="btn" @click="this.$refs.businessCard.saveCardAsImage('png')">
     Download Card As png
@@ -22,19 +36,18 @@
 
 <script>
 import BusinessCard from "./components/BusinessCard.vue";
-import MovableTest from "./components/MovableTest.vue";
 //importing pickr
 import "@simonwep/pickr/dist/themes/monolith.min.css";
 import Pickr from "@simonwep/pickr";
 export default {
   components: {
     BusinessCard,
-    MovableTest
-},
-  data(){
-    return{
-      pickedColor:'',
-    }
+  },
+  data() {
+    return {
+      pickedColor: "",
+      sliderValue: 0,
+    };
   },
   methods: {
     initPickr() {
@@ -67,13 +80,15 @@ export default {
           },
         },
       });
-      pickr.on('change',instance => {
+      pickr.on("change", (instance) => {
         this.pickedColor = instance.toHEXA();
-      })
+      });
     },
   },
   mounted() {
     this.initPickr();
+    // APPLY IMAGE TO CARD BACKGROUND 
+    this.$refs.businessCard.changeBackground('image', '../src/assets/background.jpg')
   },
 };
 </script>

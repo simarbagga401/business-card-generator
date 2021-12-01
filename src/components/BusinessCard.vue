@@ -3,10 +3,11 @@
     <h2>business card</h2>
 
     <DDR
-      v-model="transform"
+      v-model="pProperties"
       :parent="true"
       :minWidth="1"
       :active="transformActive"
+      :y="130"
     >
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
@@ -25,7 +26,7 @@ export default {
   },
   data() {
     return {
-      transform: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
+      pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
       transformActive: true,
     };
   },
@@ -58,8 +59,12 @@ export default {
       link.click();
       console.log("done");
     },
-    changeBackground(color) {
-      this.$refs.card.style.backgroundColor = color;
+    changeBackground(type, value) {
+       if (type = 'color') this.$refs.card.style.backgroundColor = value;
+       if (type = 'image') this.$refs.card.style.backgroundImage = `url(${value})`;
+    },
+      changeBorderRadius(value) {
+      this.$refs.card.style.borderRadius = `${value}px`;
     },
   },
 };
@@ -70,9 +75,9 @@ export default {
   width: 400px;
   height: 228px;
   background: rgb(248, 248, 248);
-  border: 1px solid rgb(224, 224, 224);
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
   -webkit-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   margin: 10px;
@@ -82,6 +87,7 @@ export default {
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
+  border: none;
 }
 
 /* Media-Queries */
