@@ -1,44 +1,12 @@
 <template>
   <div id="business-card" ref="card" contenteditable="">
-    <h2>business card</h2>
-
-    <DDR
-      v-model="pProperties"
-      :parent="true"
-      :minWidth="1"
-      :active="transformActive"
-      :y="130"
-    >
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
-        quas?
-      </p>
-    </DDR>
+    <slot></slot>
   </div>
 </template>
 
 <script>
-import DDR from "yoyoo-ddr-vue3";
-import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
 export default {
-  components: {
-    DDR,
-  },
-  data() {
-    return {
-      pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
-      transformActive: true,
-    };
-  },
   methods: {
-    saveCardAsImage(imageFormat) {
-      this.transformActive = false;
-      setTimeout(() => {
-        console.log("waiting");
-        this.printCard(imageFormat);
-        this.transformActive = true;
-      }, 1000);
-    },
     async printCard(imageFormat) {
       console.log("printing..");
       const el = this.$refs.card;
@@ -60,10 +28,11 @@ export default {
       console.log("done");
     },
     changeBackground(type, value) {
-       if (type = 'color') this.$refs.card.style.backgroundColor = value;
-       if (type = 'image') this.$refs.card.style.backgroundImage = `url(${value})`;
+      if ((type = "color")) this.$refs.card.style.backgroundColor = value;
+      if ((type = "image"))
+        this.$refs.card.style.backgroundImage = `url(${value})`;
     },
-      changeBorderRadius(value) {
+    changeBorderRadius(value) {
       this.$refs.card.style.borderRadius = `${value}px`;
     },
   },

@@ -1,7 +1,22 @@
 <template>
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
-  <BusinessCard ref="businessCard" />
+  <BusinessCard ref="businessCard">
+    <h2>business card</h2>
+    <h4>we make healthy products</h4>
+    <DDR
+      v-model="pProperties"
+      :parent="true"
+      :minWidth="1"
+      :active="transformActive"
+      :y="130"
+    >
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
+        quas?
+      </p>
+    </DDR>
+  </BusinessCard>
 
   <!-- Change Card Color -->
   <p>Change Background of Card :</p>
@@ -26,30 +41,44 @@
   <!-- Download BusinessCard -->
   {{ pickedColor }}
   <p>Download Card :</p>
-  <button class="btn" @click="this.$refs.businessCard.saveCardAsImage('png')">
+  <button class="btn" @click="saveCardAsImage('png')">
     Download Card As png
   </button>
-  <button class="btn" @click="this.$refs.businessCard.saveCardAsImage('jpeg')">
+  <button class="btn" @click="saveCardAsImage('jpeg')">
     Download Card As jpeg
   </button>
 </template>
 
 <script>
 import BusinessCard from "./components/BusinessCard.vue";
+//importing library to make elements movable
+import DDR from "yoyoo-ddr-vue3";
+import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
 //importing pickr
 import "@simonwep/pickr/dist/themes/monolith.min.css";
 import Pickr from "@simonwep/pickr";
 export default {
   components: {
     BusinessCard,
+    DDR,
   },
   data() {
     return {
       pickedColor: "",
       sliderValue: 0,
+      pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
+      transformActive: true,
     };
   },
   methods: {
+    saveCardAsImage(imageFormat) {
+      this.transformActive = false;
+      setTimeout(() => {
+        console.log("waiting");
+        this.$refs.businessCard.printCard(imageFormat);
+        this.transformActive = true;
+      }, 1000);
+    },
     initPickr() {
       const pickr = Pickr.create({
         el: ".color-picker",
@@ -87,8 +116,11 @@ export default {
   },
   mounted() {
     this.initPickr();
-    // APPLY IMAGE TO CARD BACKGROUND 
-    this.$refs.businessCard.changeBackground('image', '../src/assets/background.jpg')
+    // APPLY IMAGE TO CARD BACKGROUND
+    this.$refs.businessCard.changeBackground(
+      "image",
+      "../src/assets/flower-background.jpg"
+    );
   },
 };
 </script>
