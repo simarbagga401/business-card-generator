@@ -2,8 +2,8 @@
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
   <BusinessCard ref="businessCard">
-    <h2>business card</h2>
-    <h4>we make healthy products</h4>
+    <h2 id="card-heading" @click="activeEl = 'card-heading'">business card</h2>
+
     <DDR
       v-model="pProperties"
       :parent="true"
@@ -11,25 +11,20 @@
       :active="transformActive"
       :y="130"
     >
-      <p>
+      <p id="card-description" @click="activeEl = 'card-description'">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
         quas?
       </p>
     </DDR>
   </BusinessCard>
 
-  <!-- Change Card Color -->
-  <p>Change Background of Card :</p>
-  <div class="color-picker"></div>
-  <button
-    class="btn"
-    @click="this.$refs.businessCard.changeBackground('color', pickedColor)"
-  >
-    Change Card Background Color
-  </button>
+  <!-- Modify Selected Element -->
+  <h3>Modify Selected Element :</h3>
+  <p><strong>Selected Element:</strong> {{ activeEl }}</p>
+  <div class="color-picker" />
 
   <!-- Change Card Color -->
-  <p>Change Border Radius:</p>
+  <h3>Change Border Radius:</h3>
   <input
     type="range"
     v-model="sliderValue"
@@ -39,8 +34,7 @@
   />
 
   <!-- Download BusinessCard -->
-  {{ pickedColor }}
-  <p>Download Card :</p>
+  <h3>Download Card :</h3>
   <button class="btn" @click="saveCardAsImage('png')">
     Download Card As png
   </button>
@@ -64,10 +58,10 @@ export default {
   },
   data() {
     return {
-      pickedColor: "",
       sliderValue: 0,
       pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
       transformActive: true,
+      activeEl: "",
     };
   },
   methods: {
@@ -110,7 +104,7 @@ export default {
         },
       });
       pickr.on("change", (instance) => {
-        this.pickedColor = instance.toHEXA();
+        document.getElementById(this.activeEl).style.color = instance.toHEXA();
       });
     },
   },
