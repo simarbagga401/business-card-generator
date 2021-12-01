@@ -1,16 +1,44 @@
 <template>
-  <div id="business-card" ref="card">
+  <div id="business-card" ref="card" contenteditable="">
     <h2>business card</h2>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, quas?
-    </p>
+
+    <DDR
+      v-model="transform"
+      :parent="true"
+      :minWidth="1"
+      :active="transformActive"
+    >
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
+        quas?
+      </p>
+    </DDR>
   </div>
 </template>
 
 <script>
+import DDR from "yoyoo-ddr-vue3";
+import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
 export default {
+  components: {
+    DDR,
+  },
+  data() {
+    return {
+      transform: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
+      transformActive: true,
+    };
+  },
   methods: {
-    async saveCardAsImage(imageFormat) {
+    saveCardAsImage(imageFormat) {
+      this.transformActive = false;
+      setTimeout(() => {
+        console.log("waiting");
+        this.printCard(imageFormat);
+        this.transformActive = true;
+      }, 1000);
+    },
+    async printCard(imageFormat) {
       console.log("printing..");
       const el = this.$refs.card;
       const options = {
@@ -30,9 +58,9 @@ export default {
       link.click();
       console.log("done");
     },
-    changeBackground(color){
+    changeBackground(color) {
       this.$refs.card.style.backgroundColor = color;
-    }
+    },
   },
 };
 </script>
@@ -48,6 +76,12 @@ export default {
   -webkit-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.15);
   margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* Media-Queries */
@@ -58,10 +92,10 @@ export default {
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 800px) {
   #business-card {
-    width: 500px;
-    height: 285px;
+    width: 700px;
+    height: 400px;
   }
 }
 </style>

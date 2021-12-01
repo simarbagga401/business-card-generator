@@ -2,11 +2,12 @@
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
   <BusinessCard ref="businessCard" />
+  <!-- <MovableTest /> -->
 
   <!-- Change Card Color -->
   <p>Change Background of Card :</p>
   <div class="color-picker"></div>
-  <button @click="this.$refs.businessCard.changeBackground(pickedColor)">Apply</button>
+  <button class="btn" @click="this.$refs.businessCard.changeBackground(pickedColor)">Apply</button>
 
   <!-- Download BusinessCard -->
   {{pickedColor}}
@@ -21,13 +22,15 @@
 
 <script>
 import BusinessCard from "./components/BusinessCard.vue";
+import MovableTest from "./components/MovableTest.vue";
 //importing pickr
 import "@simonwep/pickr/dist/themes/monolith.min.css";
 import Pickr from "@simonwep/pickr";
 export default {
   components: {
     BusinessCard,
-  },
+    MovableTest
+},
   data(){
     return{
       pickedColor:'',
@@ -90,8 +93,9 @@ export default {
 .btn {
   padding: 10px 15px;
   margin: 5px;
-  background: rgb(64, 242, 255);
+  background: rgb(205, 252, 255);
   border: 1px solid rgb(65, 217, 255);
+  border-radius: 10px;
 }
 .btn.active {
   border: 1px solid rgb(109, 255, 109);
