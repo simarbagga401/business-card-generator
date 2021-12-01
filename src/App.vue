@@ -17,11 +17,28 @@
       </p>
     </DDR>
   </BusinessCard>
+  <button @click="test()">test</button>
 
   <!-- Modify Selected Element -->
   <h3>Modify Selected Element :</h3>
   <p><strong>Selected Element:</strong> {{ activeEl }}</p>
-  <div class="color-picker" />
+  <div class="modify-properties-container">
+    <p>Color:</p>
+    <div class="color-picker" />
+    <br />
+    <button>Bold</button>
+    <button>Italic</button>
+    <button>Underlilne</button>
+    <br />
+    <button>Delete</button>
+    <br />
+    <p>Font Size: (number)</p>
+    <input type="number" placeholder="font-size" v-model="fontSize" min="4" />
+    <br />
+    <select v-model="fontFamily">
+      <option v-for="(font, i) in fonts" :key="i">{{ font }}</option>
+    </select>
+  </div>
 
   <!-- Change Card Color -->
   <h3>Change Border Radius:</h3>
@@ -62,6 +79,9 @@ export default {
       pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
       transformActive: true,
       activeEl: "",
+      fontSize: "",
+      fontFamily: "Poppins",
+      fonts:['Roboto','Poppins','Impact','Verdana','Monospace']
     };
   },
   methods: {
