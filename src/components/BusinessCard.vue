@@ -30,6 +30,9 @@ export default {
       link.click();
       console.log("done");
     },
+    changeBackground(color){
+      this.$refs.card.style.backgroundColor = color;
+    }
   },
 };
 </script>

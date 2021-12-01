@@ -7,6 +7,14 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.16.4.tgz#d5f92f57cf2c74ffe9b37981c0e72fee7311372e"
   integrity sha512-6V0qdPUaiVHH3RtZeLIsc+6pDhbYzHR8ogA8w+f+Wc77DuXto19g2QUwveINoS34Uw+W8/hQDGJCx+i4n7xcng==
 
+"@simonwep/pickr@^1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.8.2.tgz#96dc86675940d7cad63d69c22083dd1cbb9797cb"
+  integrity sha512-/l5w8BIkrpP6n1xsetx9MWPWlU6OblN5YgZZphxan0Tq4BByTCETL6lyIeY8lagalS2Nbt4F2W034KHLIiunKA==
+  dependencies:
+    core-js "^3.15.1"
+    nanopop "^2.1.0"
+
 "@vitejs/plugin-vue@^1.9.3":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.10.1.tgz#d140e93d574c5eac247a79f5b15df665dcb7635b"
@@ -101,6 +109,11 @@
   version "3.2.23"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.23.tgz#e885a2ba099d40b69d5461157f3ade31e46a09a9"
   integrity sha512-U+/Jefa0QfXUF2qVy9Dqlrb6HKJSr9/wJcM66wXmWcTOoqg7hOWzF4qruDle51pyF4x3wMn6TSH54UdjKjCKMA==
+
+core-js@^3.15.1:
+  version "3.19.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.19.2.tgz#ae216d7f4f7e924d9a2e3ff1e4b1940220f9157b"
+  integrity sha512-ciYCResnLIATSsXuXnIOH4CbdfgV+H1Ltg16hJFN7/v6OxqnFr/IFGeLacaZ+fHLAm0TBbXwNK9/DNBzBUrO/g==
 
 csstype@^2.6.8:
   version "2.6.19"
@@ -255,6 +268,11 @@ nanoid@^3.1.30:
   version "3.1.30"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
   integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
+
+nanopop@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/nanopop/-/nanopop-2.1.0.tgz#23476513cee2405888afd2e8a4b54066b70b9e60"
+  integrity sha512-jGTwpFRexSH+fxappnGQtN9dspgE2ipa1aOjtR24igG0pv6JCxImIAmrLRHX+zUF5+1wtsFVbKyfP51kIGAVNw==
 
 path-parse@^1.0.6:
   version "1.0.7"
