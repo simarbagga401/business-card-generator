@@ -17,7 +17,14 @@
       </p>
     </DDR>
   </BusinessCard>
-  <button @click="test()">test</button>
+  <!-- Download BusinessCard -->
+  <h3>Download Card :</h3>
+  <button class="btn" @click="saveCardAsImage('png')">
+    Download Card As png
+  </button>
+  <button class="btn" @click="saveCardAsImage('jpeg')">
+    Download Card As jpeg
+  </button>
 
   <!-- Modify Selected Element -->
   <h3>Modify Selected Element :</h3>
@@ -26,16 +33,27 @@
     <p>Color:</p>
     <div class="color-picker" />
     <br />
-    <button>Bold</button>
-    <button>Italic</button>
-    <button>Underlilne</button>
+    <button @click="changeFontProperties('fontWeight', 'bold')">Bold</button>
+    <button @click="changeFontProperties('fontStyle', 'italic')">Italic</button>
+    <button @click="changeFontProperties('textDecoration', 'underline')">
+      Underlilne
+    </button>
     <br />
-    <button>Delete</button>
+    <button @click="deleteActiveEl()">Delete</button>
     <br />
     <p>Font Size: (number)</p>
-    <input type="number" placeholder="font-size" v-model="fontSize" min="4" />
+    <input
+      @change="changeFontProperties('fontSize', fontSize)"
+      type="number"
+      placeholder="font-size"
+      v-model="fontSize"
+      min="4"
+    />
     <br />
-    <select v-model="fontFamily">
+    <select
+      v-model="fontFamily"
+      @change="changeFontProperties('fontFamily', fontFamily)"
+    >
       <option v-for="(font, i) in fonts" :key="i">{{ font }}</option>
     </select>
   </div>
@@ -49,15 +67,6 @@
     max="50"
     @input="this.$refs.businessCard.changeBorderRadius(sliderValue)"
   />
-
-  <!-- Download BusinessCard -->
-  <h3>Download Card :</h3>
-  <button class="btn" @click="saveCardAsImage('png')">
-    Download Card As png
-  </button>
-  <button class="btn" @click="saveCardAsImage('jpeg')">
-    Download Card As jpeg
-  </button>
 </template>
 
 <script>
@@ -79,12 +88,35 @@ export default {
       pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
       transformActive: true,
       activeEl: "",
-      fontSize: "",
+      fontSize: 20,
       fontFamily: "Poppins",
-      fonts:['Roboto','Poppins','Impact','Verdana','Monospace']
+      fonts: ["Arial", "Poppins", "Serif", "Sans-Serif", "Monospace"],
     };
   },
   methods: {
+    changeFontProperties(property, value) {
+      let el = document.getElementById(this.activeEl).style;
+      switch (property) {
+        case "textDecoration":
+          el.textDecoration = value;
+          break;
+        case "fontStyle":
+          el.fontStyle = value;
+          break;
+        case "fontWeight":
+          el.fontWeight = value;
+          break;
+        case "fontSize":
+          el.fontSize = `${value}px`;
+          break;
+        case "fontFamily":
+          el.fontFamily = value;
+          break;
+      }
+    },
+    deleteActiveEl() {
+      document.getElementById(this.activeEl).style.display = "none";
+    },
     saveCardAsImage(imageFormat) {
       this.transformActive = false;
       setTimeout(() => {

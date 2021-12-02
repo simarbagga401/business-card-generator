@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  // TODO: Use domtoimage instead of html2canvas
   methods: {
     async printCard(imageFormat) {
       console.log("printing..");
