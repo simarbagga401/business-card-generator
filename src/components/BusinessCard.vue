@@ -1,5 +1,5 @@
 <template>
-  <div id="business-card" ref="card" contenteditable="">
+  <div id="business-card" ref="card" contenteditable="" spellcheck="false">
     <slot></slot>
   </div>
 </template>
@@ -32,10 +32,10 @@ export default {
       if ((type = "image"))
         this.$refs.card.style.backgroundImage = `url(${value})`;
     },
-    changeBorderWidth(width){
+    changeBorderWidth(width) {
       this.$refs.card.style.borderWidth = `${width}px`;
     },
-    changeBorderColor(color){
+    changeBorderColor(color) {
       this.$refs.card.style.borderColor = color;
     },
     changeBorderRadius(value) {
@@ -47,8 +47,10 @@ export default {
 
 <style scoped>
 #business-card {
-  width: 400px;
-  height: 228px;
+  /* width: 400px;
+  height: 228px; */
+  width: 700px;
+  height: 400px;
   background: rgb(248, 248, 248);
   background-repeat: no-repeat;
   background-size: cover;
@@ -62,11 +64,11 @@ export default {
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
-  border:0px solid black;
+  border: 0px solid black;
 }
 
 /* Media-Queries */
-@media screen and (max-width: 418px) {
+/* @media screen and (max-width: 418px) {
   #business-card {
     width: 300px;
     height: 171px;
@@ -78,5 +80,5 @@ export default {
     width: 700px;
     height: 400px;
   }
-}
+} */
 </style>

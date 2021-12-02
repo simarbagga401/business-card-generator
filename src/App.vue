@@ -1,28 +1,71 @@
 <template>
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
-  <BusinessCard ref="businessCard">
+  <BusinessCard
+    ref="businessCard"
+    @mouseover="toogleActiveAllWrappers(true)"
+    @mouseout="toogleActiveAllWrappers(false)"
+    @click="toogleActiveAllWrappers(true)"
+  >
+    <!-- LOGO -->
     <DDR
-      :value="h2Properties"
+      @click="activeEl = 'cardLogo'"
+      :value="logoProperties"
       :parent="true"
-      :minWidth="1"
-      :active="cardHeadingActive"
-      :y="130"
+      :active="cardLogoActive"
+      :minWidth="5"
     >
-      <h2 id="cardHeading" @click="activeEl = 'cardHeading'">Google, Pvt</h2>
+      <img src="./assets/Vector.png" id="cardLogo" />
     </DDR>
 
+    <!-- HEADING -->
     <DDR
-      :value="pProperties"
+      @click="activeEl = 'cardHeading'"
+      :value="headingProperties"
       :parent="true"
-      :minWidth="1"
-      :active="cardDescriptionActive"
-      :y="130"
+      :active="cardHeadingActive"
     >
-      <p id="cardDescription" @click="activeEl = 'cardDescription'">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
-        quas?
-      </p>
+      <h1 id="cardHeading">HORIZEN</h1>
+    </DDR>
+
+    <!-- LOGO -->
+    <DDR
+      @click="activeEl = 'cardSlogan'"
+      :value="sloganProperties"
+      :parent="true"
+      :active="cardSloganActive"
+    >
+      <h3 id="cardSlogan">Organic Tea For Healthy People.</h3>
+    </DDR>
+
+    <!-- EMAIL -->
+    <DDR
+      @click="activeEl = 'cardEmail'"
+      :value="emailProperties"
+      :parent="true"
+      :active="cardEmailActive"
+    >
+      <h3 id="cardEmail">Email: horizen@gmail.com</h3>
+    </DDR>
+
+    <!-- PHONE -->
+    <DDR
+      @click="activeEl = 'cardPhone'"
+      :value="phoneProperties"
+      :parent="true"
+      :active="cardPhoneActive"
+    >
+      <h3 id="cardPhone">Phone: +01 8283384282</h3>
+    </DDR>
+
+    <!-- ADDRESS -->
+    <DDR
+      @click="activeEl = 'cardAddress'"
+      :value="addressProperties"
+      :parent="true"
+      :active="cardAddressActive"
+    >
+      <h3 id="cardAddress">Address: 122 Main Street, City, STATE, 00123</h3>
     </DDR>
   </BusinessCard>
 
@@ -105,10 +148,24 @@ export default {
     return {
       borderRadius: 0,
       borderWidth: 0,
-      pProperties: { x: 20, y: 100, width: 500, height: 100, rotation: 0 },
-      h2Properties: { x: 10, y: 10, width: 200, height: 50, rotation: 0 },
-      cardDescriptionActive: true,
-      cardHeadingActive: true,
+      sloganProperties: { x: 230, y: 100, width: 300, height: 50, rotation: 0 },
+      headingProperties: {
+        x: 230,
+        y: 15,
+        width: 200,
+        height: 100,
+        rotation: 0,
+      },
+      logoProperties: { x: 170, y: 60, width: 50, height: 50, rotation: 0 },
+      emailProperties: { x: 230, y: 190, width: 300, height: 50, rotation: 0 },
+      phoneProperties: { x: 230, y: 220, width: 300, height: 50, rotation: 0 },
+      addressProperties: { x: 230, y: 250, width: 300, height: 50, rotation: 0 },
+      cardSloganActive: false,
+      cardHeadingActive: false,
+      cardLogoActive: false,
+      cardEmailActive: false,
+      cardPhoneActive: false,
+      cardAddressActive: false,
       activeEl: "",
       selectedColor: "",
       fontSize: 20,
@@ -142,8 +199,12 @@ export default {
       eval(`this.${this.activeEl}Active = false`);
     },
     toogleActiveAllWrappers(bool) {
-      this.cardDescriptionActive = bool;
+      this.cardSloganActive = bool;
       this.cardHeadingActive = bool;
+      this.cardLogoActive = bool;
+      this.cardEmailActive = bool;
+      this.cardPhoneActive = bool;
+      this.cardAddressActive = bool;
     },
     saveCardAsImage(imageFormat) {
       this.toogleActiveAllWrappers(false);
@@ -153,7 +214,7 @@ export default {
         this.toogleActiveAllWrappers(true);
       }, 1000);
     },
-    applyBorderColor(){
+    applyBorderColor() {
       this.$refs.businessCard.changeBorderColor(this.selectedColor);
     },
     initPickr() {
@@ -225,5 +286,26 @@ export default {
 .btn.active {
   border: 1px solid rgb(109, 255, 109);
   background: rgb(212, 255, 212);
+}
+
+/* Css for Cards innercontent */
+#cardHeading {
+  font-size: 45px;
+  color: #6e9a5a;
+}
+#cardSlogan {
+  color: #3f3f3f;
+  font-weight: normal;
+}
+#cardEmail{
+  color:#9a5a5a;
+}
+#cardPhone{
+  color:#9a5a5a;
+  font-weight: normal;
+}
+#cardAddress{
+  color:#9a5a5a;
+  font-weight: normal;
 }
 </style>
