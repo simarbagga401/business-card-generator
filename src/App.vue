@@ -2,21 +2,22 @@
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
   <BusinessCard ref="businessCard">
-    <h2 id="card-heading" @click="activeEl = 'card-heading'">business card</h2>
+    <h2 id="cardHeading" @click="activeEl = 'cardHeading'">business card</h2>
 
     <DDR
       v-model="pProperties"
       :parent="true"
       :minWidth="1"
-      :active="transformActive"
+      :active="cardDescriptionActive"
       :y="130"
     >
-      <p id="card-description" @click="activeEl = 'card-description'">
+      <p id="cardDescription" @click="activeEl = 'cardDescription'">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi,
         quas?
       </p>
     </DDR>
   </BusinessCard>
+
   <!-- Download BusinessCard -->
   <h3>Download Card :</h3>
   <button class="btn" @click="saveCardAsImage('png')">
@@ -86,7 +87,7 @@ export default {
     return {
       sliderValue: 0,
       pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
-      transformActive: true,
+      cardDescriptionActive: true,
       activeEl: "",
       fontSize: 20,
       fontFamily: "Poppins",
@@ -116,13 +117,17 @@ export default {
     },
     deleteActiveEl() {
       document.getElementById(this.activeEl).style.display = "none";
+      eval(`this.${this.activeEl}Active = false`);
+    },
+    toogleActiveAllWrappers(bool) {
+      this.cardDescriptionActive = bool;
     },
     saveCardAsImage(imageFormat) {
-      this.transformActive = false;
+      this.toogleActiveAllWrappers(false);
       setTimeout(() => {
         console.log("waiting");
         this.$refs.businessCard.printCard(imageFormat);
-        this.transformActive = true;
+        this.toogleActiveAllWrappers(true);
       }, 1000);
     },
     initPickr() {
