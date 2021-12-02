@@ -32,6 +32,12 @@ export default {
       if ((type = "image"))
         this.$refs.card.style.backgroundImage = `url(${value})`;
     },
+    changeBorderWidth(width){
+      this.$refs.card.style.borderWidth = `${width}px`;
+    },
+    changeBorderColor(color){
+      this.$refs.card.style.borderColor = color;
+    },
     changeBorderRadius(value) {
       this.$refs.card.style.borderRadius = `${value}px`;
     },
@@ -56,7 +62,7 @@ export default {
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
-  border: none;
+  border:0px solid black;
 }
 
 /* Media-Queries */

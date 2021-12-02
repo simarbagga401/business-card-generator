@@ -2,10 +2,18 @@
   <h1>Business Card Generator!</h1>
   <!-- Using BusinessCard Component  -->
   <BusinessCard ref="businessCard">
-    <h2 id="cardHeading" @click="activeEl = 'cardHeading'">business card</h2>
+    <DDR
+      :value="h2Properties"
+      :parent="true"
+      :minWidth="1"
+      :active="cardHeadingActive"
+      :y="130"
+    >
+      <h2 id="cardHeading" @click="activeEl = 'cardHeading'">Google, Pvt</h2>
+    </DDR>
 
     <DDR
-      v-model="pProperties"
+      :value="pProperties"
       :parent="true"
       :minWidth="1"
       :active="cardDescriptionActive"
@@ -33,6 +41,7 @@
   <div class="modify-properties-container">
     <p>Color:</p>
     <div class="color-picker" />
+    <button @click="applyBorderColor()">apply color to card border</button>
     <br />
     <button @click="changeFontProperties('fontWeight', 'bold')">Bold</button>
     <button @click="changeFontProperties('fontStyle', 'italic')">Italic</button>
@@ -59,14 +68,23 @@
     </select>
   </div>
 
-  <!-- Change Card Color -->
-  <h3>Change Border Radius:</h3>
+  <!-- Modify Border -->
+  <h3>Modify Border:</h3>
+  <p>Change Border Radius</p>
   <input
     type="range"
-    v-model="sliderValue"
+    v-model="borderRadius"
     min="0"
     max="50"
-    @input="this.$refs.businessCard.changeBorderRadius(sliderValue)"
+    @input="this.$refs.businessCard.changeBorderRadius(borderRadius)"
+  />
+  <p>Change Border Width</p>
+  <input
+    type="range"
+    v-model="borderWidth"
+    min="0"
+    max="20"
+    @input="this.$refs.businessCard.changeBorderWidth(borderWidth)"
   />
 </template>
 
@@ -85,10 +103,14 @@ export default {
   },
   data() {
     return {
-      sliderValue: 0,
-      pProperties: { x: 100, y: 100, width: 200, height: 100, rotation: 0 },
+      borderRadius: 0,
+      borderWidth: 0,
+      pProperties: { x: 20, y: 100, width: 500, height: 100, rotation: 0 },
+      h2Properties: { x: 10, y: 10, width: 200, height: 50, rotation: 0 },
       cardDescriptionActive: true,
+      cardHeadingActive: true,
       activeEl: "",
+      selectedColor: "",
       fontSize: 20,
       fontFamily: "Poppins",
       fonts: ["Arial", "Poppins", "Serif", "Sans-Serif", "Monospace"],
@@ -121,6 +143,7 @@ export default {
     },
     toogleActiveAllWrappers(bool) {
       this.cardDescriptionActive = bool;
+      this.cardHeadingActive = bool;
     },
     saveCardAsImage(imageFormat) {
       this.toogleActiveAllWrappers(false);
@@ -129,6 +152,9 @@ export default {
         this.$refs.businessCard.printCard(imageFormat);
         this.toogleActiveAllWrappers(true);
       }, 1000);
+    },
+    applyBorderColor(){
+      this.$refs.businessCard.changeBorderColor(this.selectedColor);
     },
     initPickr() {
       const pickr = Pickr.create({
@@ -161,6 +187,7 @@ export default {
         },
       });
       pickr.on("change", (instance) => {
+        this.selectedColor = instance.toHEXA();
         document.getElementById(this.activeEl).style.color = instance.toHEXA();
       });
     },
