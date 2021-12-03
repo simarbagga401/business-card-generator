@@ -3,9 +3,8 @@
   <!-- Using BusinessCard Component  -->
   <BusinessCard
     ref="businessCard"
-    @mouseover="toogleActiveAllWrappers(true)"
-    @mouseout="toogleActiveAllWrappers(false)"
-    @click="toogleActiveAllWrappers(true)"
+    @mouseover="toogleActiveWrappers(true)"
+    @mouseout="toogleActiveWrappers(false)"
   >
     <!-- LOGO -->
     <DDR
@@ -148,18 +147,24 @@ export default {
     return {
       borderRadius: 0,
       borderWidth: 0,
-      sloganProperties: { x: 230, y: 100, width: 300, height: 50, rotation: 0 },
+      sloganProperties: { x: 230, y: 110, width: 300, height: 30, rotation: 0 },
       headingProperties: {
         x: 230,
-        y: 15,
+        y: 60,
         width: 200,
-        height: 100,
+        height: 50,
         rotation: 0,
       },
       logoProperties: { x: 170, y: 60, width: 50, height: 50, rotation: 0 },
-      emailProperties: { x: 230, y: 190, width: 300, height: 50, rotation: 0 },
+      emailProperties: { x: 230, y: 190, width: 300, height: 30, rotation: 0 },
       phoneProperties: { x: 230, y: 220, width: 300, height: 50, rotation: 0 },
-      addressProperties: { x: 230, y: 250, width: 300, height: 50, rotation: 0 },
+      addressProperties: {
+        x: 230,
+        y: 250,
+        width: 300,
+        height: 50,
+        rotation: 0,
+      },
       cardSloganActive: false,
       cardHeadingActive: false,
       cardLogoActive: false,
@@ -198,7 +203,7 @@ export default {
       document.getElementById(this.activeEl).style.display = "none";
       eval(`this.${this.activeEl}Active = false`);
     },
-    toogleActiveAllWrappers(bool) {
+    toogleActiveWrappers(bool) {
       this.cardSloganActive = bool;
       this.cardHeadingActive = bool;
       this.cardLogoActive = bool;
@@ -207,11 +212,11 @@ export default {
       this.cardAddressActive = bool;
     },
     saveCardAsImage(imageFormat) {
-      this.toogleActiveAllWrappers(false);
+      this.toogleActiveWrappers(false);
       setTimeout(() => {
         console.log("waiting");
         this.$refs.businessCard.printCard(imageFormat);
-        this.toogleActiveAllWrappers(true);
+        this.toogleActiveWrappers(true);
       }, 1000);
     },
     applyBorderColor() {
@@ -292,20 +297,28 @@ export default {
 #cardHeading {
   font-size: 45px;
   color: #6e9a5a;
+  transform: translateY(-40px);
+}
+
+#cardSlogan,
+#cardEmail,
+#cardPhone,
+#cardAddress {
+  transform: translateY(-20px);
 }
 #cardSlogan {
   color: #3f3f3f;
   font-weight: normal;
 }
-#cardEmail{
-  color:#9a5a5a;
+#cardEmail {
+  color: #9a5a5a;
 }
-#cardPhone{
-  color:#9a5a5a;
+#cardPhone {
+  color: #9a5a5a;
   font-weight: normal;
 }
-#cardAddress{
-  color:#9a5a5a;
+#cardAddress {
+  color: #9a5a5a;
   font-weight: normal;
 }
 </style>
