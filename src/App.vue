@@ -4,8 +4,6 @@
   <BusinessCard
     ref="businessCard"
     :image="backgroundImage"
-    @mouseover="toogleActiveWrappers(true)"
-    @mouseout="toogleActiveWrappers(false)"
   >
     <!-- LOGO -->
     <DDR
@@ -170,7 +168,7 @@ export default {
       },
       logoProperties: { x: 170, y: 60, width: 50, height: 50, rotation: 0 },
       emailProperties: { x: 230, y: 190, width: 300, height: 30, rotation: 0 },
-      phoneProperties: { x: 230, y: 220, width: 300, height: 50, rotation: 0 },
+      phoneProperties: { x: 230, y: 220, width: 300, height: 30, rotation: 0 },
       addressProperties: {
         x: 230,
         y: 250,
@@ -178,12 +176,12 @@ export default {
         height: 50,
         rotation: 0,
       },
-      cardSloganActive: false,
-      cardHeadingActive: false,
-      cardLogoActive: false,
-      cardEmailActive: false,
-      cardPhoneActive: false,
-      cardAddressActive: false,
+      cardSloganActive: true,
+      cardHeadingActive: true,
+      cardLogoActive: true,
+      cardEmailActive: true,
+      cardPhoneActive: true,
+      cardAddressActive: true,
       activeEl: "",
       selectedColor: "",
       fontSize: 20,
