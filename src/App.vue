@@ -3,6 +3,7 @@
   <!-- Using BusinessCard Component  -->
   <BusinessCard
     ref="businessCard"
+    :image="backgroundImage"
     @mouseover="toogleActiveWrappers(true)"
     @mouseout="toogleActiveWrappers(false)"
   >
@@ -141,7 +142,8 @@
 </template>
 
 <script>
-import BusinessCard from "./components/BusinessCard.vue";
+import BusinessCard from "./components/BusinessCard2.vue";
+import backgroundImage from "./assets/background.jpg";
 //importing library to make elements movable
 import DDR from "yoyoo-ddr-vue3";
 import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
@@ -155,6 +157,7 @@ export default {
   },
   data() {
     return {
+      backgroundImage:backgroundImage,
       borderRadius: 0,
       borderWidth: 0,
       sloganProperties: { x: 230, y: 110, width: 300, height: 30, rotation: 0 },
@@ -275,11 +278,8 @@ export default {
   },
   mounted() {
     this.initPickr();
-    // APPLY IMAGE TO CARD BACKGROUND
-    this.$refs.businessCard.changeBackground(
-      "image",
-      "../src/assets/flower-background.jpg"
-    );
+    // console.log(backgroundImage)
+    // console.log(this.backgroundImage)
   },
 };
 </script>

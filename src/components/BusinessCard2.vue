@@ -11,29 +11,38 @@
 </template>
 
 <script>
-import * as htmlToImage from "html-to-image";
 export default {
   props: ["image"],
   data() {
     return {
-			backgroundImage:this.image,
-		};
+      backgroundImage: this.image,
+    };
   },
   methods: {
     async printCard(imageFormat) {
-      console.log("printing card..");
-      const el = document.getElementById("business-card");
-      htmlToImage
-        .toPng(el)
-        .then(function (dataUrl) {
-          var img = new Image();
-          img.src = dataUrl;
-          document.body.appendChild(img);
-        })
-        .catch(function (error) {
-          console.error("oops, something went wrong!", error);
-        });
-      console.log("done ..");
+      console.log("printing..");
+      const el = this.$refs.card;
+      const options = {
+        type: "dataURL",
+      };
+
+      const printCanvas = await html2canvas(el, options);
+      const link = document.createElement("a");
+
+      link.setAttribute("download", `download.${imageFormat}`);
+      link.setAttribute(
+        "href",
+        printCanvas
+          .toDataURL(`image/${imageFormat}`)
+          .replace(`image/${imageFormat}`, "image/octet-stream")
+      );
+      link.click();
+      console.log("done");
+    },
+    changeBackground(type, value) {
+      if ((type = "color")) this.$refs.card.style.backgroundColor = value;
+      if ((type = "image"))
+        this.$refs.card.style.backgroundImage = `url(${value})`;
     },
     changeBorderWidth(width) {
       this.$refs.card.style.borderWidth = `${width}px`;
