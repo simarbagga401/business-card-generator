@@ -93,12 +93,22 @@
     <br />
     <button @click="deleteActiveEl()">Delete</button>
     <br />
-    <p>Font Size: (number)</p>
+
+    <p>Font Size (number)</p>
     <input
       @change="changeFontProperties('fontSize', fontSize)"
       type="number"
       placeholder="font-size"
       v-model="fontSize"
+      min="4"
+    />
+    <br />
+    <p>Selected Elements Width:</p>
+    <input
+      @change="changeActiveElWidth(activeElWidth)"
+      type="number"
+      placeholder="width (px)"
+      v-model="activeElWidth"
       min="4"
     />
     <br />
@@ -174,11 +184,16 @@ export default {
       activeEl: "",
       selectedColor: "",
       fontSize: 20,
+      activeElWidth:50,
       fontFamily: "Poppins",
       fonts: ["Arial", "Poppins", "Serif", "Sans-Serif", "Monospace"],
     };
   },
   methods: {
+    changeActiveElWidth(width){
+      let el = document.getElementById(this.activeEl).style;
+      el.width = `${width}px`
+    },
     changeFontProperties(property, value) {
       let el = document.getElementById(this.activeEl).style;
       switch (property) {
