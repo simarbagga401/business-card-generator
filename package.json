@@ -8,8 +8,6 @@
   },
   "dependencies": {
     "@simonwep/pickr": "^1.8.2",
-    "dom-to-image-more": "2.8.0",
-    "html-to-image": "^1.9.0",
     "vue": "^3.2.16",
     "yoyoo-ddr-vue3": "^1.0.2"
   },
