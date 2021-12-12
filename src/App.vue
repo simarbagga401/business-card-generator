@@ -137,6 +137,9 @@
     max="20"
     @input="this.$refs.businessCard.changeBorderWidth(borderWidth)"
   />
+  
+  <!-- Github Link -->
+  <p><strong>Github: https://github.com/simarbagga401/business-card-generator </strong></p>
 </template>
 
 <script>
