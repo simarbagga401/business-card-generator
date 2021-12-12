@@ -139,7 +139,7 @@
   />
   
   <!-- Github Link -->
-  <p><strong>Github: https://github.com/simarbagga401/business-card-generator </strong></p>
+<a href="https://github.com/simarbagga401/business-card-generator/">Github Repo</a>
 </template>
 
 <script>
