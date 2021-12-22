@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/67456870/147143644-b734cbd8-0eef-4f0f-a058-bf104c2e8ab9.png)
+
 ## Live Demo
 - See Live Demo of this project on https://generate-business-card.netlify.com
 
